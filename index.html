@@ -3,8 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-<title>smuxo</title>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@300;400;600;800&display=swap" rel="stylesheet">
+<title>smuxo · ОБЫЧНЫЙ</title>
+<meta name="description" content="smuxo — сайты, телеграм-боты и софт. Живой интерактив и анимации.">
+<meta property="og:title" content="smuxo · ОБЫЧНЫЙ">
+<meta property="og:description" content="smuxo — сайты, телеграм-боты и софт. Живой интерактив и анимации.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='15' fill='%230b0705'/%3E%3Ccircle cx='32' cy='32' r='19' fill='none' stroke='%23ff5a1f' stroke-width='2.5' opacity='0.55'/%3E%3Ctext x='32' y='43' font-family='monospace' font-size='30' font-weight='bold' fill='%23ffb36b' text-anchor='middle'%3Es%3C/text%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@300;400;600;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 * {
     margin: 0;
@@ -611,6 +616,19 @@ section {
     animation: bounce 2s infinite;
     animation-delay: 0.8s;
 }
+
+body{font-family:'Inter',system-ui,sans-serif}
+[class*="title"],.hero-subtitle,.to-top-button,.bottom-signature,.ldm-button{font-family:'Orbitron',sans-serif}
+p,.about-me-text{line-height:1.7}
+.tier-plaque{margin:30px auto 0;max-width:480px;padding:16px 20px;border:1px dashed rgba(255,90,31,0.4);border-radius:12px;font-size:13px;color:#9a8c82;text-align:center;line-height:1.6}
+.tier-plaque b{color:#ffb36b}
+.tier-plaque a{color:#ff5a1f;text-decoration:none;font-weight:600}
+
+@media (hover:hover){
+.info-card,.guarantee-card,.project-card{transition:transform 0.2s ease,border-color 0.25s ease;will-change:transform;position:relative;overflow:hidden}
+.info-card::after,.guarantee-card::after,.project-card::after{content:'';position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity 0.3s ease;background:radial-gradient(240px circle at var(--mx,50%) var(--my,50%),rgba(255,120,50,0.14),transparent 65%)}
+.info-card:hover::after,.guarantee-card:hover::after,.project-card:hover::after{opacity:1}
+}
 </style>
 </head>
 <body>
@@ -634,7 +652,7 @@ section {
         <div class="info-message">Нажми чтобы узнать больше</div>
         <div class="about-me-title animated-text">Обо мне</div>
         <div class="about-me-text">
-            Я занимаюсь програмированием уже много лет. Создаю сайты, телеграм-ботов, софты для termux и много чего ещё. Ниже представлены мои навыки в разных задачах.
+            Я занимаюсь программированием уже много лет. Создаю сайты, телеграм-ботов, софты для termux и много чего ещё. Ниже представлены мои навыки в разных задачах.
         </div>
     </div>
 
@@ -726,6 +744,7 @@ section {
 
 <div class="to-top">
     <a href="#" class="to-top-button">↑ НАВЕРХ</a>
+    <div class="tier-plaque">Этот сайт — живой пример тарифа <b>ОБЫЧНЫЙ</b>: интерактивные карточки, анимации, отклик на каждое движение. Заказать такой → <a href="https://t.me/smuxo" target="_blank">t.me/smuxo</a></div>
     <div class="bottom-signature">by @smuxo</div>
 </div>
 
@@ -942,5 +961,21 @@ for (let i = 0; i < 35; i++) {
 }
 </script>
 
+<script>
+(function(){
+if(!matchMedia('(hover: hover)').matches)return;
+document.querySelectorAll('.info-card,.guarantee-card,.project-card').forEach(card=>{
+    card.addEventListener('pointermove',e=>{
+        const r=card.getBoundingClientRect();
+        const px=(e.clientX-r.left)/r.width;
+        const py=(e.clientY-r.top)/r.height;
+        card.style.setProperty('--mx',(px*100)+'%');
+        card.style.setProperty('--my',(py*100)+'%');
+        card.style.transform='perspective(800px) rotateY('+((px-0.5)*5)+'deg) rotateX('+((0.5-py)*5)+'deg)';
+    });
+    card.addEventListener('pointerleave',()=>{card.style.transform='';});
+});
+})();
+</script>
 </body>
 </html>
